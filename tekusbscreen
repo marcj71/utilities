@@ -1,0 +1,32 @@
+#! /usr/bin/python3
+
+# read this:
+# https://pyvisa-py.readthedocs.io/en/latest/installation.html
+# pip3 install pyvisa-py
+# pip3 install pyusb
+# https://techoverflow.net/2019/08/09/how-to-fix-all-usb-permission-issues-on-linux-once-and-for-all/
+
+import visa
+import datetime as dt
+import sys
+
+rm = visa.ResourceManager('@py')
+# rm.list_resources()
+scope = rm.open_resource('USB0::1689::1032::C047584::0::INSTR')
+# print(scope.query('*IDN?'))
+
+filename = dt.datetime.now().strftime('tek_%Y-%m-%d_%H-%M-%S')
+
+if len(sys.argv) > 0:
+	filename += '_' + sys.argv[1]
+
+filename += '.png'
+
+scope.write('SAVE:IMAG:FILEF PNG')
+scope.write('HARDCOPY START')
+png = scope.read_raw()
+fid = open(filename, 'wb')
+fid.write(png)
+fid.close()
+
+print(filename)

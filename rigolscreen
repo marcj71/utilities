@@ -1,0 +1,19 @@
+#! /bin/bash
+
+# ip=10.183.1.201
+ip=10.183.1.202
+
+# dashes in timestamp so even somewhat-operating systems can handle it
+filename="$(date '+rigol_%Y-%m-%d_%H-%M-%S')"
+
+if [[ "$#" -gt 0 ]];
+then
+	filename+="_$1"
+fi
+
+# remove header (12 bytes)
+# remove trailer (3 bytes: ;0\n)
+echo ":display:data?" | netcat -w 1 $ip 5555 | tail -c +12 | head -c -3 | \
+	convert bmp:- -alpha off "$filename.png"
+
+echo "$filename.png"

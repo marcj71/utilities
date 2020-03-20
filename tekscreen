@@ -1,0 +1,16 @@
+#! /bin/bash
+
+# this works: wget -O "\!*.png" http://10.183.3.29:81/image.png
+# (found by clicking 'save as' on the screen image on http://10.183.3.29/)
+ip=10.183.1.11:81
+
+# dashes in timestamp so even somewhat-operating systems can handle it
+filename=$(date '+tek_%Y-%m-%d_%H-%M-%S')
+
+# append comment to filename, if any
+if [[ "$#" -gt 0 ]];
+then
+	filename+="_$1"
+fi
+
+wget -O "${filename}.png" http://$ip/image.png
