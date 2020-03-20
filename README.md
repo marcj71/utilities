@@ -21,9 +21,9 @@ This Bash script works with Ethernet-connected Tektronix oscilloscopes. Modify t
 Uses <tt>wget</tt> to download the screen image from the built-in web server. Again, the advantage w.r.t. to the click-and-save method is that the file is timestamped and named immediately.
 
 ## tekusbscreen
-This Python 3 script downloads a screen capture from a USB-connected Tektronix oscilloscope, such as a member of the MDO3000 family. Setting it up can be a bit more tricky than the other utilities. These are dependencies for Linux:
+This Python 3 script downloads a screen capture from a USB-connected Tektronix oscilloscope, such as a member of the MDO3000 family. Setting it up can be a bit more tricky than the other utilities. These are the dependencies for Linux:
 1. Install [PyVISA](https://pyvisa.readthedocs.io/en/latest/) (<tt>sudo apt install python3-pyvisa</tt>)
-1. Install [PyVISA-py](https://pyvisa-py.readthedocs.io/en/latest/) (<tt>sudo apt install python3-pyvisa-py</tt> or <tt>pip3 install pyvisa-py</tt>. Note that you don't need the [NI VISA](http://www.ni.com/download/ni-linux-device-drivers-2018/7664/en/) libraries if you use this package.
+1. Install [PyVISA-py](https://pyvisa-py.readthedocs.io/en/latest/) (<tt>sudo apt install python3-pyvisa-py</tt> or <tt>pip3 install pyvisa-py</tt>). Note that you don't need the [NI VISA](http://www.ni.com/download/ni-linux-device-drivers-2018/7664/en/) libraries if you use this package.
 1. Install [PyUSB](https://github.com/pyusb/pyusb) (<tt>pip3 install pyusb</tt>)
 1. Uncomment the line rm.listresources() to find out how your device should be addressed. If you get an error saying that the serial number cannot be read ('Found a device whose serial number cannot be read. The partial VISA resource name is...'), look at [this instruction](https://techoverflow.net/2019/08/09/how-to-fix-pyvisa-found-a-device-whose-serial-number-cannot-be-read-the-partial-visa-resource-name-is-usb0-0instr/). Here's what I did, since I was already in the <tt>adm</tt> group and figured that's rooty enough:
    1. Created /etc/udev/rules.d/50-usbgroup.rules with only this line in it:
