@@ -4,7 +4,10 @@
 An oscilloscope is an indispensible piece of equipment. It really proves its value if you can easily capture screenshots and put them in reports or on the web. Modern digitizing oscilloscopes often have one or more interfaces to do this.
 This repository has several scripts you can use to automate the process, so you don't have to press any buttons, mess with USB thumb drives. In addition, the scripts will put a timestamp on the PNG images and allow you to add a name.
 
-The scripts all work the same: call the script from the command line, optionally followed by a description (without spaces). Upon success, they will print the name of the resulting PNG image to stdout, ready for cutting and pasting.
+The scripts all work the same: call the script from the command line, optionally followed by a description (without spaces). Upon success, they will print the name of the resulting PNG image to stdout, ready for cutting and pasting. Example:
+
+    > tekscreen serial-port
+    tek_2019-02-04_14-48-30_4.1-serial-port.png
 
 You will have modify each to work with your oscilloscope, as mentioned below.
 
@@ -30,3 +33,5 @@ This Python 3 script downloads a screen capture from a USB-connected Tektronix o
       <tt>SUBSYSTEM=="usb", MODE="0666", GROUP="adm"</tt>
    1. sudo udevadm control --reload
    1. sudo udevadm trigger
+   1. No need to log out, this will pick up the changes immediately.
+1. Re-comment out the line and change the ID string.
